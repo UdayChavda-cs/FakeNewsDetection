@@ -4,20 +4,19 @@ import joblib
 vectorizer = joblib.load("vectorizer.jb")
 model = joblib.load("lr_model.jb")
 
-st.title("Fake News Detection")
-st.write("Enter the news text below to check if it's real or fake.")
+st.title("Fake News Detector")
+st.write("Enter a News Article below to check whether it is Fake or Real. ")
 
-news_input = st.text_area("News Article:","")
+inputn = st.text_area("News Article:","")
 
-if st.button("Check"):
-    if news_input.strip():
-        transformed_input = vectorizer.transform([news_input])
-        prediction = model.predict(transformed_input)
-
+if st.button("Check News"):
+    if inputn.strip():
+        transform_input = vectorizer.transform([inputn])
+        prediction = model.predict(transform_input)
 
         if prediction[0] == 1:
-            st.success("The news is Real.")
+            st.success("The News is Real! ")
         else:
-            st.error("The news is Fake.")
+            st.error("The News is Fake! ")
     else:
-        st.warning("Please enter a news article.")  
+        st.warning("Please enter some text to Analyze. ") 
